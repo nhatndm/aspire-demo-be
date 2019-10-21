@@ -10,7 +10,11 @@ module.exports = app => {
   authRoutes.get("/verify", authController.verifyToken);
 
   loansRoutes.get("/", authMiddleware.verifyToken, loansController.getLoans);
-  loansRoutes.get("/:id", loansController.getLoanDetails);
+  loansRoutes.get(
+    "/:id",
+    authMiddleware.verifyToken,
+    loansController.getLoanDetails
+  );
   loansRoutes.put(
     "/:idloanDeTail/repayment",
     authMiddleware.verifyToken,
